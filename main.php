@@ -13,5 +13,5 @@ $titleStatus = "Cтраница статуса";
 $nameStatus = "Васек Пупкин";
 $pageStatus = new Vendor\PageBuilder\PageStatus($titleStatus, $nameStatus);
 
-echo $pageStatus->Write();
+echo $pageStatus->write();
 
