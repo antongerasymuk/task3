@@ -8,5 +8,5 @@ require_once __DIR__ . '/vendor/autoload.php';
 $title = "Главная страница";
 $name = "Васек Пупкин";
 $pageIndex = new Vendor\PageBuilder\PageIndex($title, $name);
-$pageIndex->Write(); 
+echo $pageIndex->Write(); 
 

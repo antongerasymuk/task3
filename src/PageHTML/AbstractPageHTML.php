@@ -24,9 +24,12 @@ abstract class AbstractPageHTML implements PageHTMLInterface
         $this->title = "[Домашняя страница {$this->name}] " . $title;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function BeginHTML()
     {
-        echo "<html>
+        return "<html>
               <head>
                   <title>
                       {$this->title}
@@ -35,20 +38,29 @@ abstract class AbstractPageHTML implements PageHTMLInterface
               <body>";
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function EndHTML()
     {
-        echo "</body>
-              </html>";
+        return "</body>
+                </html>";
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function Logo()
     {
-        echo "<h1>Домашняя страница {$this->name}</h2>";
+        return "<h1>Домашняя страница {$this->name}</h2>";
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function Menu()
     {
-        echo "<table>
+        return "<table>
                   <tr>
                       <td>
                           <a href='index.php'>Главная страница</a>
@@ -63,14 +75,23 @@ abstract class AbstractPageHTML implements PageHTMLInterface
               </table>";
     }
 
+    /**
+     * @return string
+     */
     abstract public function MainText();
 
+    /**
+     * {@inheritdoc}
+     */
     public function Write()
     {
-        $this->BeginHTML();
-        $this->Logo();
-        $this->Menu();
-        $this->MainText();
-        $this->EndHTML();
+        $string = '';
+        $string .= $this->BeginHTML();
+        $string .= $this->Logo();
+        $string .= $this->Menu();
+        $string .= $this->MainText();
+        $string .= $this->EndHTML();
+
+        return $string;
     }
 }
