@@ -21,13 +21,13 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     public function __construct($title, $name)
     {
         $this->name = $name;
-        $this->title = "[Домашняя страница {$this->name}] " . $title;
+        $this->title = "[{$title}] ".$this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function BeginHTML()
+    protected function beginHTML()
     {
         return "<html>
               <head>
@@ -41,7 +41,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     /**
      * {@inheritdoc}
      */
-    public function EndHTML()
+    protected function endHTML()
     {
         return "</body>
                 </html>";
@@ -50,15 +50,15 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     /**
      * {@inheritdoc}
      */
-    public function Logo()
+    protected function logo()
     {
-        return "<h1>Домашняя страница {$this->name}</h2>";
+        return "<h1>{$this->title}</h2>";
     }
 
     /**
      * {@inheritdoc}
      */
-    public function Menu()
+    protected function menu()
     {
         return "<table>
                   <tr>
@@ -76,21 +76,37 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function status()
+    {
+        $time = date("F j, Y, g:i a");
+        return "<table>
+                  <tr>
+                      <td>
+                          <h3>Статус</h3>
+                          $time
+                      </td>
+                  </tr>
+              </table>";
+    }
+
+    /**
      * @return string
      */
-    abstract public function MainText();
+    protected abstract function mainText();
 
     /**
      * {@inheritdoc}
      */
-    public function Write()
+    public function write()
     {
         $string = '';
-        $string .= $this->BeginHTML();
-        $string .= $this->Logo();
-        $string .= $this->Menu();
-        $string .= $this->MainText();
-        $string .= $this->EndHTML();
+        $string .= $this->beginHTML();
+        $string .= $this->logo();
+        $string .= $this->menu();
+        $string .= $this->mainText();
+        $string .= $this->endHTML();
 
         return $string;
     }

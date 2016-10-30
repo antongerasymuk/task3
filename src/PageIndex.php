@@ -9,8 +9,8 @@ class PageIndex extends AbstractPageHTML
     /**
      * {@inheritdoc}
      */
-    public function MainText()
+    protected function mainText()
     {
-        return "<p>Добро пожаловать на домашнюю страничку Васи Пупкина";
+        return "<p>Добро пожаловать на домашнюю страничку!";
     }
 }

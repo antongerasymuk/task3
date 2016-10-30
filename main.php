@@ -5,8 +5,13 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$title = "Главная страница";
-$name = "Васек Пупкин";
-$pageIndex = new Vendor\PageBuilder\PageIndex($title, $name);
-echo $pageIndex->Write(); 
+//$titleIndex = "Главная страница";
+//$nameIndex = "Васек Пупкин";
+//$pageIndex = new Vendor\PageBuilder\PageIndex($titleIndex, $nameIndex);
+
+$titleStatus = "Cтраница статуса";
+$nameStatus = "Васек Пупкин";
+$pageStatus = new Vendor\PageBuilder\PageStatus($titleStatus, $nameStatus);
+
+echo $pageStatus->Write();
 
