@@ -81,6 +81,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     public function status()
     {
         $time = date("F j, Y, g:i a");
+
         return $this->twig->render('status.twig', array('time' => $time));
     }
 
