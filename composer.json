@@ -1,0 +1,20 @@
+{
+    "name": "vendor/pagebuilder",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton_BR ",
+            "email": "bron_off1@ukr.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Vendor\\PageBuilder\\": "src"
+        }
+    },
+    "require": {
+        "twig/extensions": "^1.4"
+    }
+}
