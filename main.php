@@ -12,6 +12,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 $titleStatus = "Cтраница статуса";
 $nameStatus = "Васек Пупкин";
 $pageStatus = new Vendor\PageBuilder\PageStatus($titleStatus, $nameStatus);
+Twig_Autoloader::register();
+$loader = new Twig_Loader_Filesystem($pageStatus->templatePath);
+$twig = new Twig_Environment($loader);
+$pageStatus->twigInit($twig);
 
 echo $pageStatus->write();
 

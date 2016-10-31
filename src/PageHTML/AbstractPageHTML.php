@@ -7,12 +7,22 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     /**
      * @var string
      */
-    protected $title = "";
+    protected $title;
 
     /**
      * @var string
      */
-    protected $name = "";
+    public $templatePath;
+
+    /**
+     * @var /Twig_Environment
+     */
+    protected $twig;
+
+    /**
+     * @var string
+     */
+    protected $name;
 
     /**
      * @param string $title
@@ -20,8 +30,17 @@ abstract class AbstractPageHTML implements PageHTMLInterface
      */
     public function __construct($title, $name)
     {
+        $this->templatePath = __DIR__."/Template";
         $this->name = $name;
         $this->title = "[{$title}] ".$this->name;
+    }
+
+    /**
+     * @param \Twig_Environment $twig
+     */
+    public function twigInit(\Twig_Environment $twig)
+    {
+        $this->twig = $twig;
     }
 
     /**
@@ -29,13 +48,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
      */
     protected function beginHTML()
     {
-        return "<html>
-              <head>
-                  <title>
-                      {$this->title}
-                  </title>
-              </head>
-              <body>";
+        return $this->twig->render('beginHTML.twig', array('title' => $this->title));
     }
 
     /**
@@ -43,8 +56,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
      */
     protected function endHTML()
     {
-        return "</body>
-                </html>";
+        return $this->twig->render('endHTML.twig', array());
     }
 
     /**
@@ -52,7 +64,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
      */
     protected function logo()
     {
-        return "<h1>{$this->title}</h2>";
+        return $this->twig->render('logo.twig', array('title' => $this->title));
     }
 
     /**
@@ -60,19 +72,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
      */
     protected function menu()
     {
-        return "<table>
-                  <tr>
-                      <td>
-                          <a href='index.php'>Главная страница</a>
-                      </td>
-                      <td>
-                          <a href='bio.php'>Биография</a>
-                      </td>
-                      <td>
-                          <a href='links.php'>Ссылки</a>
-                      </td>
-                  </tr>
-              </table>";
+        return $this->twig->render('menu.twig', array());
     }
 
     /**
@@ -81,14 +81,7 @@ abstract class AbstractPageHTML implements PageHTMLInterface
     public function status()
     {
         $time = date("F j, Y, g:i a");
-        return "<table>
-                  <tr>
-                      <td>
-                          <h3>Статус</h3>
-                          $time
-                      </td>
-                  </tr>
-              </table>";
+        return $this->twig->render('status.twig', array('time' => $time));
     }
 
     /**

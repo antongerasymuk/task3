@@ -14,5 +14,7 @@
             "Vendor\\PageBuilder\\": "src"
         }
     },
-    "require": {}
+    "require": {
+        "twig/extensions": "^1.4"
+    }
 }
